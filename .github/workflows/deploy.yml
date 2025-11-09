@@ -19,19 +19,18 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: web/spiro-mint
+        working-directory: web/spiro-mint   # 你的前端代码目录
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: web/spiro-mint/package-lock.json
 
       - name: Install deps
-        run: npm ci
+        run: npm ci || npm i
 
       - name: Build
         run: npm run build
@@ -39,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web/spiro-mint/dist
+          path: web/spiro-mint/dist          # 如果是 CRA 改成 web/spiro-mint/build
 
   deploy:
     needs: build
