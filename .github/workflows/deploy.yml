@@ -11,40 +11,37 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: web/spiro-mint
-
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      # 打印仓库结构 + 自动找到含有 "build" 脚本的 package.json 所在目录
+      - name: Detect frontend dir
+        id: detect
+        run: |
+          echo "PWD: $(pwd)"
+          echo "== Top-level =="
+          ls -la
+          echo "== package.json candidates (max depth 4) =="
+          find . -maxdepth 4 -name package.json -not -path "*/node_modules/*" -print
 
-      - name: Install deps
-        run: npm ci
+          FRONTEND_DIR=""
+          for f in $(find . -maxdepth 4 -name package.json -not -path "*/node_modules/*"); do
+            if grep -q '"build"' "$f"; then
+              FRONTEND_DIR="$(dirname "$f")"
+              break
+            fi
+          done
 
-      - name: Build
-        run: npm run build
+          if [ -z "$FRONTEND_DIR" ]; then
+            echo "::error::Could not find a package.json with a build script. Please check your repo."
+            exit 1
+          fi
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: web/spiro-mint/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          echo "Detected frontend dir: $FRONTEND_DIR"
+          echo "FRONTEND_DIR=$FRONTEND_DIR" >> $
