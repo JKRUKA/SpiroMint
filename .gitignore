@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -137,3 +138,9 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+=======
+﻿node_modules/
+dist/
+.DS_Store
+Thumbs.db
+>>>>>>> 43dde4e (init: spiro-mint web app (pages-ready))

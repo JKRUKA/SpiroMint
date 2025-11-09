@@ -1,0 +1,52 @@
+{
+  "hash": "b08d67c2",
+  "configHash": "37e2523e",
+  "lockfileHash": "e52ddab8",
+  "browserHash": "896c11d7",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "9270c4f6",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "1c2483c7",
+      "needsInterop": true
+    },
+    "ethers": {
+      "src": "../../node_modules/ethers/lib.esm/index.js",
+      "file": "ethers.js",
+      "fileHash": "5411df40",
+      "needsInterop": false
+    },
+    "web3.storage": {
+      "src": "../../node_modules/web3.storage/src/lib.js",
+      "file": "web3__storage.js",
+      "fileHash": "7a6f778e",
+      "needsInterop": false
+    },
+    "meyda": {
+      "src": "../../node_modules/meyda/dist/web/meyda.min.js",
+      "file": "meyda.js",
+      "fileHash": "7b1d41c4",
+      "needsInterop": true
+    },
+    "music-tempo": {
+      "src": "../../node_modules/music-tempo/dist/node/MusicTempo.js",
+      "file": "music-tempo.js",
+      "fileHash": "6d9724da",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-LTZIYYLR": {
+      "file": "chunk-LTZIYYLR.js"
+    },
+    "chunk-V4OQ3NZ2": {
+      "file": "chunk-V4OQ3NZ2.js"
+    }
+  }
+}
