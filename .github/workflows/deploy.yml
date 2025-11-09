@@ -11,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -19,18 +19,17 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: web/spiro-mint   # 你的前端代码目录
+        working-directory: web/spiro-mint
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Install deps
-        run: npm ci || npm i
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -38,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web/spiro-mint/dist          # 如果是 CRA 改成 web/spiro-mint/build
+          path: web/spiro-mint/dist
 
   deploy:
     needs: build
